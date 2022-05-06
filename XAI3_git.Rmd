@@ -19,9 +19,12 @@ library(reshape2)
 library(lubridate)
 library(randomForestSRC)
 
+
 #setwd("/Users/cmonserr/OneDrive - UPV/Trabajo_2/Asignaturas/Evaluacion de modelos/Practicas/Practica 3/Bike-Sharing-Dataset")
 days <- read.csv("day.csv")
 hour <- read.csv("hour.csv")
+
+x = 34
 
 days$dteday <- as_date(days$dteday)
 days_since <- select(days, workingday, holiday, temp, hum, windspeed, cnt)
