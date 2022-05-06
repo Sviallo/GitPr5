@@ -55,7 +55,7 @@ p2 <- ggplot(days_since, aes(x=temp, y = results$temp)) + geom_line() + geom_rug
 p3 <- ggplot(days_since, aes(x=hum , y = results$hum)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Humidity") + scale_y_continuous(limits = c(2500,6000)) 
 p4 <- ggplot(days_since, aes(x=windspeed, y = results$windspeed)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Wind speed") + scale_y_continuous(limits = c(2500,6000))
 
-subplot(p1,p2,p3,p4)
+subplot(p1,p2,p3,p4, titleX = TRUE, titleY = TRUE, shareY = TRUE)
 
 ```
 
@@ -92,6 +92,8 @@ for(i in 1:nrow(th)){
   sal <- predict(rf, r)$predicted
   th[["p"]][i] <- sum(sal) / nr
 }
+
+
 
 ```
 
