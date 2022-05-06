@@ -21,11 +21,8 @@ library(randomForestSRC)
 
 
 #setwd("/Users/cmonserr/OneDrive - UPV/Trabajo_2/Asignaturas/Evaluacion de modelos/Practicas/Practica 3/Bike-Sharing-Dataset")
-days <- read.csv("day.csv")
-hour <- read.csv("hour.csv")
-
-x = 34
-y = 44
+days <- read.csv("C:/Users/sergi/OneDrive/Escritorio/UPV/3_curso/EDM/Trabajo2/Practica 5 Sin sol/day.csv")
+hour <- read.csv("C:/Users/sergi/OneDrive/Escritorio/UPV/3_curso/EDM/Trabajo2/Practica 5 Sin sol/hour.csv")
 
 days$dteday <- as_date(days$dteday)
 days_since <- select(days, workingday, holiday, temp, hum, windspeed, cnt)
@@ -53,8 +50,16 @@ for(c in names(results)[1:4])
   }
 }
 
+p1 <- ggplot(days_since, aes(x=days_since_2011, y = results$days_since_2011)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Days since 2011") + ylab("Prediction") + scale_y_continuous(limits = c(2500,6000))
+p2 <- ggplot(days_since, aes(x=temp, y = results$temp)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Temperature") + scale_y_continuous(limits = c(2500,6000)) 
+p3 <- ggplot(days_since, aes(x=hum , y = results$hum)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Humidity") + scale_y_continuous(limits = c(2500,6000)) 
+p4 <- ggplot(days_since, aes(x=windspeed, y = results$windspeed)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Wind speed") + scale_y_continuous(limits = c(2500,6000))
+
+subplot(p1,p2,p3,p4)
 
 ```
+
+
 
 ## EXERCISE:
 
