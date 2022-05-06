@@ -93,7 +93,9 @@ for(i in 1:nrow(th)){
   th[["p"]][i] <- sum(sal) / nr
 }
 
-
+p5 = ggplot(th, aes(temp, hum, fill = p)) + geom_tile(width = 40, height = 40) +
+  labs(x="Temperature", y = "Humidity") + guides(fill = guide_colourbar(title = "Bike rentals"))
+p5
 
 ```
 
