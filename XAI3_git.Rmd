@@ -50,16 +50,19 @@ for(c in names(results)[1:4])
   }
 }
 
-p1 <- ggplot(days_since, aes(x=days_since_2011, y = results$days_since_2011)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Days since 2011") + ylab("Prediction") + scale_y_continuous(limits = c(2500,6000))
-p2 <- ggplot(days_since, aes(x=temp, y = results$temp)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Temperature") + scale_y_continuous(limits = c(2500,6000)) 
-p3 <- ggplot(days_since, aes(x=hum , y = results$hum)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Humidity") + scale_y_continuous(limits = c(2500,6000)) 
-p4 <- ggplot(days_since, aes(x=windspeed, y = results$windspeed)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Wind speed") + scale_y_continuous(limits = c(2500,6000))
+p1 <- ggplot(days_since, aes(x=days_since_2011, y = results$days_since_2011)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Days since 2011") + ylab("Prediction") + ylim(2500,6000)
+p2 <- ggplot(days_since, aes(x=temp, y = results$temp)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Temperature") + ylim(2500,6000)
+p3 <- ggplot(days_since, aes(x=hum , y = results$hum)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Humidity") + ylim(2500,6000)
+p4 <- ggplot(days_since, aes(x=windspeed, y = results$windspeed)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Wind speed") + ylim(2500,6000)
 
 subplot(p1,p2,p3,p4, titleX = TRUE, titleY = TRUE, shareY = TRUE)
 
 ```
+Comentaremos las gráficas de izquierda a derecha; empezando por Days_since_2011 se obseva que el alquiler de bicis aumenta conforme más tiempo ha pasado desde que la empresa abrió o desde que empezó a guardar datos en la base, la bajada final probablemente se debe a la falta de datos en esa parte. La subida se deve seguramente a que al pasar el tiempo la empresa se ha ido haciendo más conocida, se ha expandido en diferentes lugares, etc.
 
+Ahora vemos la variable Temperature, que según los valores de esta aumentan, más bicis se alquilan: por ejemplo con una temperatura de 10ºC, de media se alquilan unas 3950, pero cuando la temperatura sube hasta los 25ºC se llegan a alquilar 5100 bicis. Esta variable es bastante influyente en el modelo, pues en general, la gente prefiere temperaturas cálidas para dar un paseo en bicicleta. Se ve que a partir de los 28 grados más o menos y cuando aja de los 3 o 4 no hay casi datos por lo que es normal que en esas partes se pierda la tendencia comentada.
 
+Analizando la variable humedad y viento, pasa al contrario que con temperatura, pues probablemente a mayor humedad o mayor viento, la gente tiene menos ganas de coger la bici. Tambien encontramos puntos donde la recta es paralela al eje porque no hay suficientes datos.
 
 ## EXERCISE:
 
@@ -93,8 +96,8 @@ for(i in 1:nrow(th)){
   th[["p"]][i] <- sum(sal) / nr
 }
 
-p5 = ggplot(th, aes(temp, hum, fill = p)) + geom_tile(width = 40, height = 40) +
-  labs(x="Temperature", y = "Humidity") + guides(fill = guide_colourbar(title = "Bike rentals"))
+p5 = ggplot(th, aes(temp, hum, fill = p)) + geom_tile(width = 18, height = 15) + geom_rug() + 
+  labs(x="Temperature", y = "Humidity")
 p5
 
 ```
@@ -114,7 +117,7 @@ Analyse the influence of **bedrooms, bathrooms, sqft_living** and **floors** on 
 
 ```{r}
 
-d <- read.csv("kc_house_data.csv")
+d <- read.csv("C:/Users/sergi/OneDrive/Escritorio/UPV/3_curso/EDM/Trabajo2/Practica 5 Sin sol/kc_house_data.csv")
 
 sampled <- sample_n(d, 1000)
 
@@ -134,5 +137,11 @@ for(c in names(results)[1:4])
   }
 }
 
+p1 <- ggplot(sampled, aes(x=bedrooms, y=results$bedrooms)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Bedrooms") + ylab("Prediction")
+p2 <- ggplot(sampled, aes(x=bathrooms, y=results$bathrooms)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Bathrooms") + ylab("Prediction")
+p3 <- ggplot(sampled, aes(x=sqft_living, y=results$sqft_living)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Sqft living") + ylab("Prediction")
+p4 <- ggplot(sampled, aes(x=floors, y=results$floors)) + geom_line() + geom_rug(alpha=0.1, sides="b") + xlab("Floors") + ylab("Prediction")
+
+subplot(p1,p2,p3,p4, titleX = TRUE)
 ```
 
