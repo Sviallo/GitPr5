@@ -97,11 +97,11 @@ for(i in 1:nrow(th)){
 }
 
 p5 = ggplot(th, aes(temp, hum, fill = p)) + geom_tile(width = 18, height = 15) + geom_rug() + 
-  labs(x="Temperature", y = "Humidity")
+  labs(x="Temperature", y = "Humidity") + guides(fill = guide_colourbar(title = "Bike rentals"))
 p5
 
 ```
-
+El alquiler de bicis aumenta conforme la temperatura (Temperature) sube, además se observa que pasa el efecto contrario con la humidad (Humidity) pues al bajar esta, sube el valor de la variable dependiente. No se observan interacciones notables entre las dos variables pues no se observan zonas del mapa con valores que llamen la atención. No debemos olvidar que la distribución es pobre en valores extremos, pues no son muy habituales, por lo que habría que coger con pinzas las zonas asociadas a esos valores pero en este caso la tendencia es bastante clara.
 
 ## EXERCISE:
 
@@ -144,4 +144,7 @@ p4 <- ggplot(sampled, aes(x=floors, y=results$floors)) + geom_line() + geom_rug(
 
 subplot(p1,p2,p3,p4, titleX = TRUE)
 ```
+En cuanto a la primera y última gráfica, vemos que hay muy pocas muestras por lo que probablemente los resultados no son significativos. De esta forma, en la gráfica de las habitaciones no se acaba de ver nada muy destacable pues el precio varía de forma no constante, mientras que en el de pisos si, pues se entiende que cuántos más pisos tiene, más precio vale.
+
+Por otra parte, tanto para los metros cuadrados como para los baños, aumenta el precio cuando estos aumentan, lo cual resulta bastante evidente.
 
